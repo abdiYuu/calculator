@@ -126,8 +126,3 @@ let current_operator;
 digits.forEach(digit => digit.addEventListener('click', displayNum));
 operators.forEach(operator => operator.addEventListener('click', updateOperator));
 equals.addEventListener('click', finalAnswer);
-
-/*mobile*/
-digits.forEach(digit => digit.addEventListener('touchend', displayNum));
-operators.forEach(operator => operator.addEventListener('click', updateOperator));
-equals.addEventListener('click', finalAnswer);
