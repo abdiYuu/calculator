@@ -38,52 +38,96 @@ function operate(operator, numbers) {
 }
 
 function displayNum(e) {
-	let num = e.target.innerText;
-	const display = document.querySelector('h1');
-	display.innerText += num;
-
+	if (current_operator && operands.includes(Number(display.innerText) || operands.length > 0)) {display.innerText=''};
+	display.innerText+= e.target.innerText;
 }
 
 function clearDisplay() {
-	operands.push(Number(document.querySelector('h1').innerText))
-	document.querySelector('h1').innerText = '';
+	display.innerText = ''
 }
 
-function storeOperation(e) {
-	clearDisplay();
-	operator = e.target.innerText;
+function storeNum() {
+	operands.push(Number(display.innerText))
 }
 
-function displayAnswer() {
-	clearDisplay();
+function emptyOperands() {
+	operands.splice(0)
+}
+
+function evaluate(operator) {
+	let ans;
 	switch(true) {
 		case (operator === '+'):
-			document.querySelector('h1').innerText = operate(add, operands);
+			ans =  operate(add, operands);
 			break;
 		case (operator === '-'):
-			document.querySelector('h1').innerText = operate(subtract, operands);
-			break;
+                        ans =  operate(subtract, operands);
+                        break;
 		case (operator === 'x'):
-			document.querySelector('h1').innerText = operate(multiply, operands);
-			break;
+                        ans =  operate(multiply, operands);
+                        break;
 		case (operator === '/'):
-			document.querySelector('h1').innerText = operate(divide, operands);
+                        ans =  operate(divide, operands);
+                        break;
+		case (operator === '%'):
+                        //code
+                        break;
+		case (operator === '√'):
+                        //code
+                        break;
+		case (operator === 'xʸ'):
+			//code
 			break;
 		default:
-			document.querySelector('h1').innerText = 0;
+			return operands[0];
 
+		}
+	if((ans - Math.floor(ans)) !== 0) {
+		return ans.toFixed(2);
+	}else {
+		return ans;
 	}
-	operands = [];
 }
 
+function updateOperator(e) {
+	storeNum();
+	last_operator = current_operator;
+	current_operator = e.target.innerText;
+	if (operands.length > 1) {
+		let current_ans = evaluate(last_operator)
+		operands.splice(0);
+		operands.push(current_ans);
+		display.innerText=current_ans;
+	}
+}
+
+function finalAnswer(e) {
+	current_operator = '='
+	storeNum();
+	clearDisplay();
+	if (operands.length > 1) {
+		let final_ans = evaluate(current_operator)
+		display.innerText=final_ans;
+		operands.splice(0);
+		operands.push(final_ans);
+	}else {
+		display.innerText = operands[0]
+	}
+}
+
+
+const display = document.querySelector('p');
 const digits = document.querySelectorAll('.num');
-digits.forEach(digit => digit.addEventListener('click', displayNum));
-
 const operators = document.querySelectorAll('.operator');
-operators.forEach(operator => operator.addEventListener('click', storeOperation));
+const equals = document.querySelector('.answer')
+const operands = [];
+let current_operator;
 
-const answer = document.querySelector('.answer');
-answer.addEventListener('click', displayAnswer);
+digits.forEach(digit => digit.addEventListener('click', displayNum));
+operators.forEach(operator => operator.addEventListener('click', updateOperator));
+equals.addEventListener('click', finalAnswer);
 
-let operands = [];
-let operator;
+/*mobile*/
+digits.forEach(digit => digit.addEventListener('touchend', displayNum));
+operators.forEach(operator => operator.addEventListener('click', updateOperator));
+equals.addEventListener('click', finalAnswer);
