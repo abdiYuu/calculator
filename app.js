@@ -227,6 +227,8 @@ function getKey(e) {
 		updateOperator(e)
 	} else if (key == '=' || key == 'Enter') {
 		finalAnswer()
+	} else if (key == 'Backspace') {
+		deleteLast();
 	}else{
 		return;
 	}
