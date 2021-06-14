@@ -61,7 +61,17 @@ function displayNum(e) {
 		clearDisplay();
 		emptyOperands();
 	}
-	if(Number(display.innerText) === current_ans || Number(display.innerText) === final_ans) {display.innerText = ''}
+	if(Number(display.innerText) == current_ans || Number(display.innerText) == final_ans || current_operator == '=') {display.innerText = ''}
+	if (e.target.innerText === '.' && display.innerText.includes('.')) {return;};
+
+	if (e.target.innerText === '±' && display.innerText.includes('-')) {
+		display.innerText = display.innerText.slice(1);
+		return;
+	} else if (e.target.innerText === '±'){
+		display.innerText = '-' + display.innerText;
+		return;
+	}
+
 	if(e instanceof KeyboardEvent) {
 		display.innerText+= e.key;
 	} else {
@@ -82,6 +92,12 @@ function clearAll() {
 	operands.splice(0)
 	clearDisplay();
 	current_operator = ''
+}
+
+function deleteLast() {
+	let str = display.innerText
+	let new_str = str.slice(0, str.length-1);
+	display.innerText = new_str;
 }
 
 function evaluate(operator) {
@@ -161,6 +177,7 @@ const digits = document.querySelectorAll('.num');
 const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('.answer')
 const clear = document.querySelector('.clear');
+const del = document.querySelector('.delete');
 const operands = [];
 let current_operator;
 let current_ans;
@@ -170,6 +187,7 @@ digits.forEach(digit => digit.addEventListener('click', displayNum));
 operators.forEach(operator => operator.addEventListener('click', updateOperator));
 equals.addEventListener('click', finalAnswer);
 clear.addEventListener('click', clearAll);
+del.addEventListener('click', deleteLast);
 
 function getKey(e) {
 	let key = e.key;
@@ -192,7 +210,9 @@ function getKey(e) {
 			key == '/' ||
 			key == '%') {
 		updateOperator(e)
-	} else {
+	} else if (key == '=' || 'Enter') {
+		finalAnswer()
+	}else{
 		return;
 	}
 }
