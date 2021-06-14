@@ -28,7 +28,12 @@ function divide(numbers) {
 	let quotient = numbers[0];
 	numbers.shift();
 	for(let num of numbers) {
-		quotient/= num;
+		if(num === 0) {
+			alert('WHAT do you think you\'re doing? Dividing by zero?! Go find another calculator to try and break.');
+			clearAll();
+		} else {
+			quotient/= num;
+		}
 	}
 	return quotient;
 }
