@@ -22,7 +22,7 @@ body {
 }
 .calculator {
 	width:320px;
-	height:70vh;
+	height:80vh;
 	border-radius:1rem;
 	box-shadow: 1rem 1rem #B3E9C7;
 }
@@ -76,7 +76,7 @@ button {
 
 p{
 	margin: auto .5rem;
-	font-size:2rem;
+	font-size:3rem;
 
 }
 

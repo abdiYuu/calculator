@@ -51,6 +51,11 @@ function operate(operator, numbers) {
 }
 
 function displayNum(e) {
+	if(display.innerText.length === 12) {
+		alert('You cannot enter more than 12 digits');
+		clearDisplay();
+		emptyOperands();
+	}
 	if(Number(display.innerText) === current_ans || Number(display.innerText) === final_ans) {display.innerText = ''}
 	display.innerText+= e.target.innerText;
 }
