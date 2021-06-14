@@ -57,7 +57,11 @@ function displayNum(e) {
 		emptyOperands();
 	}
 	if(Number(display.innerText) === current_ans || Number(display.innerText) === final_ans) {display.innerText = ''}
-	display.innerText+= e.target.innerText;
+	if(e instanceof KeyboardEvent) {
+		display.innerText+= e.key;
+	} else {
+		display.innerText+= e.target.innerText;
+	}
 }
 
 function clearDisplay() {
@@ -82,7 +86,7 @@ function evaluate(operator) {
 		case (operator === '-'):
                         ans =  operate(subtract, operands);
                         break;
-		case (operator === 'x'):
+		case (operator === 'x' || operator === '*'):
                         ans =  operate(multiply, operands);
                         break;
 		case (operator === '/'):
@@ -117,7 +121,11 @@ function updateOperator(e) {
 	storeNum();
 	clearDisplay();
 	last_operator = current_operator;
-	current_operator = e.target.innerText;
+	if(e instanceof KeyboardEvent) {
+		current_operator = e.key;
+	} else {
+		current_operator = e.target.innerText;
+	}
 	if (operands.length > 1) {
 		current_ans = evaluate(last_operator)
 		operands.splice(0);
@@ -155,3 +163,29 @@ operators.forEach(operator => operator.addEventListener('click', updateOperator)
 equals.addEventListener('click', finalAnswer);
 
 
+function getKey(e) {
+	let key = e.key;
+	if(key == 1 ||
+		key == 2 ||
+		key == 2 ||
+		key == 4 ||
+		key == 5 ||
+		key == 6 ||
+		key == 7 ||
+		key == 8 ||
+		key == 9 ||
+		key == 0) {
+
+		displayNum(e);
+	} else if ( key == '+' ||
+			key == '-' ||
+			key == '*' ||
+			key == 'x' ||
+			key == '/' ||
+			key == '%') {
+		updateOperator(e)
+	} else {
+		return;
+	}
+}
+document.addEventListener('keyup', getKey);
