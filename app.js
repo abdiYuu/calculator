@@ -33,12 +33,16 @@ function divide(numbers) {
 	return quotient;
 }
 
+function root(numbers) {
+	return Math.sqrt(numbers[0])
+}
+
 function operate(operator, numbers) {
 	return operator(numbers);
 }
 
 function displayNum(e) {
-	if (current_operator && operands.includes(Number(display.innerText) || operands.length > 0)) {display.innerText=''};
+	if (operands.length > 0) {display.innerText=''};
 	display.innerText+= e.target.innerText;
 }
 
@@ -73,7 +77,7 @@ function evaluate(operator) {
                         //code
                         break;
 		case (operator === '√'):
-                        //code
+                        ans = operate(root, operands);
                         break;
 		case (operator === 'xʸ'):
 			//code
@@ -90,6 +94,11 @@ function evaluate(operator) {
 }
 
 function updateOperator(e) {
+	let last_operator;
+	if (current_operator === '=') {
+		current_operator = e.target.innerText;
+		return;
+	}
 	storeNum();
 	last_operator = current_operator;
 	current_operator = e.target.innerText;
@@ -101,8 +110,7 @@ function updateOperator(e) {
 	}
 }
 
-function finalAnswer(e) {
-	current_operator = '='
+function finalAnswer() {
 	storeNum();
 	clearDisplay();
 	if (operands.length > 1) {
@@ -113,6 +121,7 @@ function finalAnswer(e) {
 	}else {
 		display.innerText = operands[0]
 	}
+	current_operator = '=';
 }
 
 
