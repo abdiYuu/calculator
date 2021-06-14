@@ -60,6 +60,7 @@ function operate(operator, numbers) {
 }
 
 function displayNum(e) {
+	if(current_operator === '=') {clearAll()};
 	if(display.innerText.length === 12) {
 		alert('You cannot enter more than 12 digits');
 		clearDisplay();
