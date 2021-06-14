@@ -90,7 +90,7 @@ button:hover {
 button:active {
 }
 
-@media (max-height:600px) {
+@media (max-width:320px) {
 	.calculator {
 		width:50%;
 		height:60vh;
@@ -100,5 +100,8 @@ button:active {
 	}
 	button:hover {
 		font-size:1.5rem;
+	}
+	p {
+		font-size:1rem;
 	}
 }
