@@ -145,7 +145,13 @@ function whichButton(e) {
 }
 
 function updateOperator(e) {
-	if (last_clicked.includes('operator')) {return};
+	if (last_clicked.includes('operator')) {
+		current_operator = e.target.innerText;
+		return;
+	} else if (last_clicked.includes('operator') && e instanceof KeyboardEvent) {
+		curent_operator = e.key;
+		return;
+	}
 	 if (final_ans === display.innerText) {
                 return;
         }
