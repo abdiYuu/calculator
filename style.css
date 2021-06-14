@@ -74,6 +74,8 @@ button {
 
 .row:last-child > button:first-child {
 	border-bottom-left-radius:1rem;
+	padding-left:0;
+	padding-right:1.5rem;
 }
 
 p{
@@ -86,4 +88,17 @@ button:hover {
 	font-size:2rem;
 }
 button:active {
+}
+
+@media (max-height:600px) {
+	.calculator {
+		width:50%;
+		height:60vh;
+	}
+	button {
+		font-size:1rem;
+	}
+	button:hover {
+		font-size:1.5rem;
+	}
 }

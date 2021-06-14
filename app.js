@@ -51,6 +51,10 @@ function root(numbers) {
 	return Math.sqrt(numbers[0])
 }
 
+function square(numbers) {
+	return numbers[0]**numbers[1];
+}
+
 function operate(operator, numbers) {
 	return operator(numbers);
 }
@@ -122,7 +126,7 @@ function evaluate(operator) {
                         ans = operate(root, operands);
                         break;
 		case (operator === 'xʸ'):
-			//code
+			ans = operate(square, operands);
 			break;
 		default:
 			return operands[0];
