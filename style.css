@@ -9,7 +9,7 @@
 }
 body {
 	margin:0;
-	background:#0D1317;
+	background:#EFD6D2;
 	font-family:'Baloo Tammudu 2', sans-serif;
 }
 
@@ -24,7 +24,7 @@ body {
 	width:320px;
 	height:80vh;
 	border-radius:1rem;
-	box-shadow: 1rem 1rem #89D2DC;
+	border:1px solid black;
 }
 
 .display {
@@ -32,7 +32,7 @@ body {
 	height:30%;
 	padding:0;
 	margin:0;
-	background:#89D2DC;
+	background:#FFDDE2;
 	display:flex;
 	direction:rtl;
 	border-top-left-radius:1rem;
@@ -60,12 +60,12 @@ button {
 	font-size:1.5rem;
 	width:100%;
 	border:none;
-	background:#6564DB;
+	background:#FF8CC6;
 	cursor:pointer;
 }
 
 .option, .operator, .answer {
-	background:#1E27AE;
+	background:#DE369D;
 }
 
 .row:last-child > button:last-child {
