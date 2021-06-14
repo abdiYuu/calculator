@@ -73,8 +73,9 @@ function storeNum() {
 	clearDisplay();
 }
 
-function emptyOperands() {
+function clearAll() {
 	operands.splice(0)
+	clearDisplay();
 }
 
 function evaluate(operator) {
@@ -153,6 +154,7 @@ const display = document.querySelector('p');
 const digits = document.querySelectorAll('.num');
 const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('.answer')
+const clear = document.querySelector('.clear');
 const operands = [];
 let current_operator;
 let current_ans;
@@ -161,7 +163,7 @@ let final_ans;
 digits.forEach(digit => digit.addEventListener('click', displayNum));
 operators.forEach(operator => operator.addEventListener('click', updateOperator));
 equals.addEventListener('click', finalAnswer);
-
+clear.addEventListener('click', clearAll);
 
 function getKey(e) {
 	let key = e.key;
