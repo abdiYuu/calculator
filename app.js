@@ -141,6 +141,9 @@ function evaluate(operator) {
 }
 
 function updateOperator(e) {
+	if (current_operator === e.key || current_operator === e.target.innerText) {
+		return;
+	}
 	let last_operator;
 	if (current_operator === '=' && (e instanceof KeyboardEvent)) {
 		current_operator = e.key;
@@ -194,7 +197,7 @@ const equals = document.querySelector('.answer')
 const clear = document.querySelector('.clear');
 const del = document.querySelector('.delete');
 const operands = [];
-let current_operator;
+let current_operator = null;
 let current_ans;
 let final_ans;
 
