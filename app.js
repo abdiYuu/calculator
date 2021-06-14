@@ -137,12 +137,14 @@ function evaluate(operator) {
 
 function updateOperator(e) {
 	let last_operator;
-	if (current_operator === '=') {
-		current_operator = e.target.innerText;
+	if (current_operator === '=' && (e instanceof KeyboardEvent)) {
+		current_operator = e.key;
 		return;
+	}else if (current_operator === '=') {
+		current_operator = e.target.innerText;
+		return
 	}
 	storeNum();
-	clearDisplay();
 	last_operator = current_operator;
 	if(e instanceof KeyboardEvent) {
 		current_operator = e.key;
@@ -193,7 +195,7 @@ function getKey(e) {
 	let key = e.key;
 	if(key == 1 ||
 		key == 2 ||
-		key == 2 ||
+		key == 3 ||
 		key == 4 ||
 		key == 5 ||
 		key == 6 ||
@@ -210,7 +212,7 @@ function getKey(e) {
 			key == '/' ||
 			key == '%') {
 		updateOperator(e)
-	} else if (key == '=' || 'Enter') {
+	} else if (key == '=' || key == 'Enter') {
 		finalAnswer()
 	}else{
 		return;
