@@ -76,6 +76,7 @@ function storeNum() {
 function clearAll() {
 	operands.splice(0)
 	clearDisplay();
+	current_operator = ''
 }
 
 function evaluate(operator) {
