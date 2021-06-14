@@ -25,6 +25,7 @@ body {
 	height:80vh;
 	border-radius:1rem;
 	border:1px solid black;
+	box-shadow:1rem 1rem #6F5E76;
 }
 
 .display {
