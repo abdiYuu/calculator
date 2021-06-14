@@ -66,7 +66,7 @@ function displayNum(e) {
 		clearDisplay();
 		emptyOperands();
 	}
-	if(Number(display.innerText) == current_ans || Number(display.innerText) == final_ans || current_operator == '=') {display.innerText = ''}
+	if(Number(display.innerText) == current_ans || display.innerText.includes('e') || Number(display.innerText) == final_ans || current_operator == '=') {display.innerText = ''}
 	if (e.target.innerText === '.' && display.innerText.includes('.')) {return;};
 
 	if (e.target.innerText === '±' && display.innerText.includes('-')) {
@@ -158,9 +158,13 @@ function updateOperator(e) {
 	}
 	if (operands.length > 1) {
 		current_ans = evaluate(last_operator)
-		operands.splice(0);
+		operands.splice(0); 
 		operands.push(current_ans);
-		display.innerText=current_ans;
+		if(String(current_ans).length >= 12) {
+			display.innerText=current_ans.toExponential(2);
+		}else {
+			display.innerText = current_ans;
+		}
 	}
 }
 
@@ -169,9 +173,13 @@ function finalAnswer() {
 	clearDisplay();
 	if (operands.length > 1) {
 		final_ans = evaluate(current_operator)
-		display.innerText=final_ans;
 		operands.splice(0);
 		operands.push(final_ans);
+		if(String(final_ans).length >=12) {
+			display.innerText=final_ans.toExponential(2);
+		} else {
+			display.innerText=final_ans;
+		}
 	}else {
 		display.innerText = operands[0]
 	}
