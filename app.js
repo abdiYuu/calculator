@@ -33,6 +33,15 @@ function divide(numbers) {
 	return quotient;
 }
 
+function modulo(numbers) {
+	let remainder= numbers[0]
+	numbers.shift();
+	for(let num of numbers) {
+		remainder%= num
+	}
+	return remainder;
+}
+
 function root(numbers) {
 	return Math.sqrt(numbers[0])
 }
@@ -42,7 +51,7 @@ function operate(operator, numbers) {
 }
 
 function displayNum(e) {
-	if (operands.length > 0) {display.innerText=''};
+	if(Number(display.innerText) === current_ans || Number(display.innerText) === final_ans) {display.innerText = ''}
 	display.innerText+= e.target.innerText;
 }
 
@@ -52,6 +61,7 @@ function clearDisplay() {
 
 function storeNum() {
 	operands.push(Number(display.innerText))
+	clearDisplay();
 }
 
 function emptyOperands() {
@@ -74,7 +84,7 @@ function evaluate(operator) {
                         ans =  operate(divide, operands);
                         break;
 		case (operator === '%'):
-                        //code
+                        ans = operate(modulo, operands);
                         break;
 		case (operator === '√'):
                         ans = operate(root, operands);
@@ -100,10 +110,11 @@ function updateOperator(e) {
 		return;
 	}
 	storeNum();
+	clearDisplay();
 	last_operator = current_operator;
 	current_operator = e.target.innerText;
 	if (operands.length > 1) {
-		let current_ans = evaluate(last_operator)
+		current_ans = evaluate(last_operator)
 		operands.splice(0);
 		operands.push(current_ans);
 		display.innerText=current_ans;
@@ -114,7 +125,7 @@ function finalAnswer() {
 	storeNum();
 	clearDisplay();
 	if (operands.length > 1) {
-		let final_ans = evaluate(current_operator)
+		final_ans = evaluate(current_operator)
 		display.innerText=final_ans;
 		operands.splice(0);
 		operands.push(final_ans);
@@ -131,7 +142,11 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('.answer')
 const operands = [];
 let current_operator;
+let current_ans;
+let final_ans;
 
 digits.forEach(digit => digit.addEventListener('click', displayNum));
 operators.forEach(operator => operator.addEventListener('click', updateOperator));
 equals.addEventListener('click', finalAnswer);
+
+
