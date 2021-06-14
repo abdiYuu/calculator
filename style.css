@@ -22,7 +22,7 @@ body {
 }
 .calculator {
 	width:320px;
-	height:80vh;
+	height:60vh;
 	border-radius:1rem;
 	border:1px solid black;
 	box-shadow:1rem 1rem #6F5E76;
@@ -94,7 +94,6 @@ button:active {
 @media (max-width:320px) {
 	.calculator {
 		width:50%;
-		height:60vh;
 	}
 	button {
 		font-size:1rem;

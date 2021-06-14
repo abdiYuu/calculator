@@ -140,7 +140,15 @@ function evaluate(operator) {
 	}
 }
 
+function whichButton(e) {
+	last_clicked = Array.from(e.target.classList);
+}
+
 function updateOperator(e) {
+	 if (final_ans === display.innerText) {
+                return;
+        }
+
 	if (current_operator === e.key || current_operator === e.target.innerText) {
 		return;
 	}
@@ -172,6 +180,7 @@ function updateOperator(e) {
 }
 
 function finalAnswer() {
+	if(last_clicked.includes('operator')){return};
 	storeNum();
 	clearDisplay();
 	if (operands.length > 1) {
@@ -196,17 +205,18 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('.answer')
 const clear = document.querySelector('.clear');
 const del = document.querySelector('.delete');
+const buttons = document.querySelectorAll('button');
 const operands = [];
 let current_operator = null;
 let current_ans;
 let final_ans;
-
+let last_clicked = null;
 digits.forEach(digit => digit.addEventListener('click', displayNum));
 operators.forEach(operator => operator.addEventListener('click', updateOperator));
 equals.addEventListener('click', finalAnswer);
 clear.addEventListener('click', clearAll);
 del.addEventListener('click', deleteLast);
-
+buttons.forEach(button => button.addEventListener('click', whichButton));
 function getKey(e) {
 	let key = e.key;
 	if(key == 1 ||
